@@ -5,7 +5,7 @@ function box(x, y, side, id) {
     this.y = y;
     this.side = side;
     this.id = "" + Math.floor(id % 10) + Math.floor(id / 10);
-    var div = '<button type="button" id="' + this.id + '" onclick="revealBox(this.id)" class="btn btn-secondary btn-outline-light"></button>';
+    var div = '<button type="button" id="' + this.id + '" onclick="revealBox(this.id)" class="p-0 btn btn-secondary btn-outline-light"></button>';
     var brd = document.getElementById("board").innerHTML;
     document.getElementById("board").innerHTML = brd + div;
     document.getElementById(this.id).style.position = "absolute";
@@ -54,15 +54,16 @@ function placeNumbs(x, y) {
 async function revealBox(id) {
     var html = document.getElementById(id).innerHTML;
     if (board[id[0]][id[1]] > 0) {
-        document.getElementById(id).innerHTML = html + board[id[0]][id[1]];
         if(board[id[0]][id[1]] == 9){
+            var bombImg = '<img class="p-0 m-0" src="assets/img/bomb.png" style="height: ' + side*0.85 + 'px; width: ' + side*0.86 + 'px;">';
             document.getElementById(id).style.backgroundColor = "darkorange";
-            document.getElementById(id).style.color = "white";
-            alert("You lose");
-            location.reload();
+            document.getElementById(id).style.background = "transparent";
+            document.getElementById(id).innerHTML = bombImg; 
+            setTimeout(lose, 200);
         }else{
             document.getElementById(id).style.backgroundColor = "cadetblue";
             document.getElementById(id).style.color = "white";
+            document.getElementById(id).innerHTML = html + board[id[0]][id[1]];
         }
         board[id[0]][id[1]] = -2;
     } else if(board[id[0]][id[1]] == 0){
@@ -73,7 +74,7 @@ async function revealBox(id) {
         document.getElementById(id).style.backgroundColor = "white";
         document.getElementById(id).style.color = "black";
     }
-    
+    //verifyFullBoard();
 }
 
 var expandBoxes = function(px, py) {
@@ -101,4 +102,15 @@ var expandBoxes = function(px, py) {
             }
         }
     }
+}
+
+function verifyFullBoard(){
+    for (i = 0; i < 10; i++) {
+        board[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+}
+
+function lose(){
+    alert("You lose")
+    location.reload();
 }
