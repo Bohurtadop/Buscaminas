@@ -56,12 +56,12 @@ async function revealBox(id) {
     if (board[id[0]][id[1]] > 0) {
         document.getElementById(id).innerHTML = html + board[id[0]][id[1]];
         if(board[id[0]][id[1]] == 9){
-            document.getElementById(id).style.backgroundColor = "red";
+            document.getElementById(id).style.backgroundColor = "darkorange";
             document.getElementById(id).style.color = "white";
             alert("You lose");
             location.reload();
         }else{
-            document.getElementById(id).style.backgroundColor = "blue";
+            document.getElementById(id).style.backgroundColor = "cadetblue";
             document.getElementById(id).style.color = "white";
         }
         board[id[0]][id[1]] = -2;
