@@ -13,11 +13,10 @@ function printTittle(){
 }
 
 function printBoard(){
-    var html = document.getElementById("board").innerHTML;
     var height = screen.height*0.92;
     var width = screen.width;
     var side;
-    
+    var id = 0;
     document.getElementById("board").style.backgroundColor = "white";
     document.getElementById("board").style.color = "white";
     document.getElementById("board").style.width = width + "px";
@@ -26,14 +25,16 @@ function printBoard(){
         side = height/12;
         for(var x = (width-height)/2 + (height/12); x < width - ((width-height)/2) - (height/11); x = x + side){
             for(var y = screen.height*0.08 + (height/12); y < screen.height*0.08 + height - (height/11); y = y + side){
-                Box(x, y, side);
+                box(x, y, side, id);
+                id++;
             }
         }
     }else{
         side = width/12;
         for(var x = 0 + (width/12); x < width - (width/11); x = x + side){
             for(var y = screen.height*0.08 + ((height-width)/2) + (width/12); y < screen.height*0.08 + height - ((height-width)/2) - (width/11); y = y + side){
-                Box(x, y, side);
+                box(x, y, side, id);
+                id++;
             }
         }
     }
@@ -43,4 +44,5 @@ function printBoard(){
 function printScreen(){
     printTittle();
     printBoard();
+    placeBombs();
 }
