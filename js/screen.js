@@ -17,7 +17,7 @@ function printBoard(){
     var width = screen.width;
     var side;
     var id = 0;
-    document.getElementById("board").style.backgroundColor = "white";
+    document.getElementById("board").style.backgroundColor = "blue";
     document.getElementById("board").style.color = "white";
     document.getElementById("board").style.width = width + "px";
     document.getElementById("board").style.height = height + "px";
