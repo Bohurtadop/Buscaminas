@@ -26,7 +26,11 @@ function initMatriz() {
 function placeBombs() {
     console.log("Placing bombs around the board");
     n = 0;
-    while (n < 3) {
+    var bombs = parseInt(prompt("Bienvenido/a a Buscaminas, digite el número de bombas (Máximo 20, default 10).", "20"));
+    if (isNaN(bombs) || bombs < 1 || bombs > 20){
+        bombs = 10;
+    }
+    while (n < bombs) {
         rand1 = Math.floor(Math.random() * 10);
         rand2 = Math.floor(Math.random() * 10);
         if (board[rand1][rand2] != 9) {
@@ -71,10 +75,10 @@ async function revealBox(id) {
         }
     } else if(board[id[0]][id[1]] == 0){
         new expandBoxes(parseInt(id[0]), parseInt(id[1]));
-        document.getElementById(id).style.backgroundColor = "white";
+        document.getElementById(id).style.backgroundColor = "floralwhite";
         document.getElementById(id).style.color = "black";
     } else if(board[id[0]][id[1]] != -2){
-        document.getElementById(id).style.backgroundColor = "white";
+        document.getElementById(id).style.backgroundColor = "floralwhite";
         document.getElementById(id).style.color = "black";
     }
 }
