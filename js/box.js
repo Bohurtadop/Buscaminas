@@ -26,7 +26,7 @@ function initMatriz() {
 function placeBombs() {
     console.log("Placing bombs around the board");
     n = 0;
-    while (n < 8) {
+    while (n < 3) {
         rand1 = Math.floor(Math.random() * 10);
         rand2 = Math.floor(Math.random() * 10);
         if (board[rand1][rand2] != 9) {
@@ -66,6 +66,9 @@ async function revealBox(id) {
             document.getElementById(id).innerHTML = html + board[id[0]][id[1]];
         }
         board[id[0]][id[1]] = -2;
+        if(verifyFullBoard()){
+            setTimeout(win, 200);
+        }
     } else if(board[id[0]][id[1]] == 0){
         new expandBoxes(parseInt(id[0]), parseInt(id[1]));
         document.getElementById(id).style.backgroundColor = "white";
@@ -74,7 +77,6 @@ async function revealBox(id) {
         document.getElementById(id).style.backgroundColor = "white";
         document.getElementById(id).style.color = "black";
     }
-    //verifyFullBoard();
 }
 
 var expandBoxes = function(px, py) {
@@ -106,8 +108,18 @@ var expandBoxes = function(px, py) {
 
 function verifyFullBoard(){
     for (i = 0; i < 10; i++) {
-        board[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        for (j = 0; j < 10; j++){
+            if (board[i][j] < 9 && board[i][j] > 0){
+                return false;
+            }
+        }
     }
+    return true;
+}
+
+function win(){
+    alert("You win")
+    location.reload();
 }
 
 function lose(){
